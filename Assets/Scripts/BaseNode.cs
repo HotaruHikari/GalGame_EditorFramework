@@ -41,27 +41,38 @@ namespace GalGameEditor
         [SerializeField]
         protected List<NodeData> m_NextNodes;
         
+        [SerializeField]
+        protected List<NodeData> m_PreNodes;
+        
         public BaseNode()
         {
-            if (m_NextNodes == null)
-            {
-                m_NextNodes = new List<NodeData>();
-            }
+            m_NextNodes = new List<NodeData>();
+            m_PreNodes = new List<NodeData>();
         }
         
         public BaseNode(BaseNode node)
         {
             m_NodeData = new NodeData(node.m_NodeData);
             m_NextNodes = new List<NodeData>();
+            m_PreNodes = new List<NodeData>();
             for (int i = 0; i < node.m_NextNodes.Count; i++)
             {
                 m_NextNodes.Add(new NodeData(node.m_NextNodes[i]));
             }
+            for (int i = 0; i < node.m_PreNodes.Count; i++)
+            {
+                m_PreNodes.Add(new NodeData(node.m_PreNodes[i]));
+            }
         }
         
-        public ref List<NodeData> NextNodes()
+        public ref List<NodeData> GetNextNodes()
         {
             return ref m_NextNodes;
+        }
+        
+        public ref List<NodeData> GetPreNodes()
+        {
+            return ref m_PreNodes;
         }
     }
 }
